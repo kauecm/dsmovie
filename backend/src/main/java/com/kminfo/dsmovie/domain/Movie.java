@@ -1,11 +1,14 @@
 package com.kminfo.dsmovie.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +29,9 @@ public class Movie  implements Serializable {
 	
 	private String image;
 
+	@OneToMany(mappedBy = "id.movie")
+	private Set<Score> scores = new HashSet<Score>();
+	
 	public Movie() {
 		
 	}
@@ -105,6 +111,10 @@ public class Movie  implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Set<Score> getScores() {
+		return scores;
 	}
 	
 }
